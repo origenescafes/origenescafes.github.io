@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historia del café Fine Cup Brasil Alta Mogiana</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+      font-family: system-ui, sans-serif;
+    }
+
+    #splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: url('https://cdn.shopify.com/s/files/1/0859/9263/6746/files/Burundi_Musenyi.webp?v=1770796581') center/cover no-repeat;
+      text-align: center;
+      cursor: pointer;
+      padding: 20px;
+    }
+
+    #overlay-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(3px);
+    }
+
+    #splash-content {
+      position: relative;
+      color: #fff;
+      z-index: 2;
+    }
+
+    #splash-content p {
+      font-size: 1.5rem;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    #splash-content button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 14px;
+      background: #fff;
+      color: #000;
+      cursor: pointer;
+    }
+
+    #splash-content button:active {
+      transform: scale(0.97);
+    }
+
+    #loading {
+      display: none;
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #fff;
+      opacity: 0.8;
+    }
+      /* Persistent logo */
+    #logo {
+      position: fixed;
+      top: 25px;
+      left: 25px;
+      z-index: 9999;
+    }
+
+    #logo img {
+      width: 100px;
+      height: auto;
+      opacity: 0.9;
+      transition: opacity 0.2s ease;
+    }
+
+    #logo img:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="splash">
+    <div id="overlay-bg"></div>
+    <div id="splash-content">
+      <p>Café Fine Cup Brasil Alta Mogiana</p>
+      <button id="start-btn">Toca para escuchar</button>
+      <div id="loading">Cargando...</div>
+    </div>
+  </div>
+
+  <audio id="audio" src="https://cdn.shopify.com/s/files/1/0859/9263/6746/files/BurundiMusenyi.mp3?v=1764162551" preload="auto"></audio>
+
+  <script>
+    const splash = document.getElementById("splash");
+    const audio = document.getElementById("audio");
+    const loading = document.getElementById("loading");
+    const startBtn = document.getElementById("start-btn");
+
+    let ready = false;
+
+    audio.addEventListener("canplaythrough", () => {
+      ready = true;
+      loading.style.display = "none";
+    });
+
+    const startAudio = async () => {
+      if (!ready) {
+        loading.style.display = "block";
+      }
+
+      try {
+        await audio.play();
+        splash.style.opacity = "0";
+        setTimeout(() => splash.remove(), 300);
+      } catch (err) {
+        console.error("Playback failed:", err);
+      }
+    };
+
+    splash.addEventListener("click", startAudio);
+    startBtn.addEventListener("click", startAudio);
+  </script>
+
+  <!-- Persistent Logo Link -->
+  <a id="logo" href="https://origenes.store" target="_self">
+    <img src="https://cdn.shopify.com/s/files/1/0859/9263/6746/files/logo_origenes_final_transparente_small_8876166a-de27-40ad-8bd0-8f4df2f8b384.png?v=1762857756" alt="Página principal de origenes.store" />
+  </a>
+</body>
+</html>
