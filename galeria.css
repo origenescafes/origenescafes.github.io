@@ -33,9 +33,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Espacio reservado: se ve hasta que añadas el logo */
+    /* Espacio reservado: se ve hasta que añadas el logo 
     background: rgba(42, 28, 20, 0.06);
-    border: 1px dashed rgba(42, 28, 20, 0.35);
+    border: 1px dashed rgba(42, 28, 20, 0.35); */
 }
 
 .logo img {
